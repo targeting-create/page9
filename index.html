@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Подождите идет загрузка ...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--[if IE]>
+   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style>
+   article, aside, details, figcaption, figure, footer,header,
+   hgroup, menu, nav, section { display: block; }
+  </style>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ </head>
+ <body>
+  <p id="hide_onload">Подождите идет загрузка ...</p>
+	 <iframe id="main_window_content"
+			 src="page.html" 
+			 width="100%" 
+			 height="100%" 
+			 style="position:absolute;top:0;left:0;border:none;overflow:hidden; display:none;" 
+			 scrolling="yes" 
+			 frameborder="0" 
+			 allow="encrypted-media"></iframe>
+	 
+	 
+	  <script>
+		 let url_string = window.location.href;
+         let url = new URL(url_string);
+		 document.getElementById('main_window_content').src = 'https://strategic-model.ru' + url.search;
+		 document.getElementById('main_window_content').style.display = 'block';
+		  
+		 $.ajax({
+			url: 'https://strategic-model.ru' + url.search,
+			success: function (responseHtml) {
+				document.title  = $(responseHtml).filter('title').text()
+			}
+        });
+		document.addEventListener("DOMContentLoaded", () => {
+			$('#hide_onload').hide();
+		});
+	 </script>
+ </body>
+</html>
+
+	
+
